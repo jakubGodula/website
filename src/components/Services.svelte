@@ -149,6 +149,7 @@
     .services {
         background: transparent;
         position: relative;
+        overflow: hidden;
     }
 
     .section-header {
