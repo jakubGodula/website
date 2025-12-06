@@ -38,6 +38,24 @@
                 "Doradztwo w zakresie cyberbezpieczeństwa i ochrony danych",
             icon: "🔒",
         },
+        {
+            title: "Web3",
+            description:
+                "Tworzenie zdecentralizowanych aplikacji, smart kontraktów i rozwiązań blockchain",
+            icon: "🔗",
+        },
+        {
+            title: "Sieci",
+            description:
+                "Projektowanie, wdrażanie i zabezpieczanie infrastruktury sieciowej dla firm",
+            icon: "📡",
+        },
+        {
+            title: "Szkolenia",
+            description:
+                "Warsztaty i szkolenia z zakresu cyberbezpieczeństwa, programowania i nowych technologii",
+            icon: "🎓",
+        },
     ];
 
     onMount(() => {
@@ -74,9 +92,6 @@
         );
         elements.forEach((el) => observer.observe(el));
 
-        const wrappers = document.querySelectorAll(".service-wrapper");
-        wrappers.forEach((el) => observer.observe(el));
-
         return () => observer.disconnect();
     });
 </script>
@@ -105,8 +120,20 @@
         </div>
 
         <div class="services-grid" style="margin-top: var(--spacing-xl);">
-            {#each services.slice(3) as service, index}
+            {#each services.slice(3, 6) as service, index}
                 <div class="service-wrapper slide-right">
+                    <div class="service-card">
+                        <div class="service-icon">{service.icon}</div>
+                        <h3 class="service-title">{service.title}</h3>
+                        <p class="service-description">{service.description}</p>
+                    </div>
+                </div>
+            {/each}
+        </div>
+
+        <div class="services-grid" style="margin-top: var(--spacing-xl);">
+            {#each services.slice(6, 9) as service, index}
+                <div class="service-wrapper slide-left">
                     <div class="service-card">
                         <div class="service-icon">{service.icon}</div>
                         <h3 class="service-title">{service.title}</h3>
@@ -137,12 +164,9 @@
         transform: translateY(0);
     }
 
-    /* Desktop: Show all when wrapper is visible */
-    @media (min-width: 769px) {
-        :global(.grids-wrapper.visible) .service-wrapper {
-            opacity: 1 !important;
-            transform: translateX(0) !important;
-        }
+    :global(.grids-wrapper.visible) .service-wrapper {
+        opacity: 1;
+        transform: translateX(0);
     }
 
     .section-title {
@@ -176,22 +200,16 @@
         aspect-ratio: 1;
         opacity: 0;
         transition:
-            transform 1s cubic-bezier(0.4, 0, 0.2, 1),
-            opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+            transform 2.5s cubic-bezier(0.4, 0, 0.2, 1),
+            opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .service-wrapper.slide-left {
-        transform: translateX(-50px);
+        transform: translateX(-200%);
     }
 
     .service-wrapper.slide-right {
-        transform: translateX(50px);
-    }
-
-    /* Individual visibility (Mobile + lazy load override) */
-    :global(.service-wrapper.visible) {
-        opacity: 1;
-        transform: translateX(0) !important;
+        transform: translateX(200%);
     }
 
     .service-card {
