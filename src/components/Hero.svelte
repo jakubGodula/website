@@ -11,17 +11,10 @@
 </script>
 
 <section class="hero">
-    <div class="hero-background">
-        <div class="gradient-orb orb-1"></div>
-        <div class="gradient-orb orb-2"></div>
-        <div class="gradient-orb orb-3"></div>
-    </div>
-
     <div class="container">
         <div class="hero-content" class:visible>
             <h1 class="hero-title">
-                <span class="company-name">Quanturity</span>
-                <span class="company-type">sp. z o.o.</span>
+                <img src="imgs/logo_long.png" alt="Quanturity" />
             </h1>
 
             <p class="hero-subtitle">
@@ -29,8 +22,9 @@
             </p>
 
             <p class="hero-description">
-                Tworzymy dedykowane systemy webowe, automatyzujemy procesy
-                biznesowe i wdrażamy rozwiązania oparte o sztuczną inteligencję
+                Tworzymy dedykowane systemy informatyczne, automatyzujemy
+                procesy biznesowe i wdrażamy rozwiązania oparte o sztuczną
+                inteligencję
             </p>
 
             <a href="#contact" class="cta-button">
@@ -65,51 +59,6 @@
         overflow: hidden;
     }
 
-    .hero-background {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 0;
-        overflow: hidden;
-    }
-
-    .gradient-orb {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(80px);
-        opacity: 0.3;
-        animation: float 8s ease-in-out infinite;
-    }
-
-    .orb-1 {
-        width: 500px;
-        height: 500px;
-        background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
-        top: -10%;
-        left: -10%;
-        animation-delay: 0s;
-    }
-
-    .orb-2 {
-        width: 400px;
-        height: 400px;
-        background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
-        bottom: -10%;
-        right: -5%;
-        animation-delay: 2s;
-    }
-
-    .orb-3 {
-        width: 350px;
-        height: 350px;
-        background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
-        top: 50%;
-        right: 20%;
-        animation-delay: 4s;
-    }
-
     .hero-content {
         position: relative;
         z-index: 1;
@@ -129,24 +78,12 @@
         margin-bottom: var(--spacing-lg);
     }
 
-    .company-name {
-        display: block;
-        font-size: var(--font-size-6xl);
-        font-weight: 700;
-        letter-spacing: -0.02em;
-        background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin-bottom: var(--spacing-xs);
-    }
-
-    .company-type {
-        display: block;
-        font-size: var(--font-size-xl);
-        font-weight: 300;
-        color: var(--color-text-secondary);
-        letter-spacing: 0.1em;
+    .company-logo {
+        max-width: 100%;
+        width: 600px;
+        height: auto;
+        margin-bottom: var(--spacing-sm);
+        filter: brightness(0) invert(1);
     }
 
     .hero-subtitle {
@@ -201,8 +138,8 @@
             min-height: 90vh;
         }
 
-        .company-name {
-            font-size: var(--font-size-5xl);
+        .company-logo {
+            width: 300px;
         }
 
         .hero-subtitle {
@@ -211,10 +148,6 @@
 
         .hero-description {
             font-size: var(--font-size-base);
-        }
-
-        .gradient-orb {
-            filter: blur(60px);
         }
     }
 </style>

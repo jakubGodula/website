@@ -35,7 +35,11 @@
                 </p>
 
                 <div class="info-items">
-                    <div class="info-item">
+                    <div
+                        class="info-item"
+                        class:visible
+                        style="animation-delay: 0.2s"
+                    >
                         <div class="info-icon">📧</div>
                         <div class="info-content">
                             <div class="info-label">Email</div>
@@ -46,7 +50,11 @@
                         </div>
                     </div>
 
-                    <div class="info-item">
+                    <div
+                        class="info-item"
+                        class:visible
+                        style="animation-delay: 0.4s"
+                    >
                         <div class="info-icon">🏢</div>
                         <div class="info-content">
                             <div class="info-label">Firma</div>
@@ -57,13 +65,17 @@
             </div>
 
             <div class="contact-cta">
-                <div class="cta-card">
+                <div
+                    class="cta-card"
+                    class:visible
+                    style="animation-delay: 0.3s"
+                >
                     <h3 class="cta-title">Masz projekt w głowie?</h3>
                     <p class="cta-text">
                         Opowiedz nam o swoich potrzebach, a my zaproponujemy
                         najlepsze rozwiązanie dopasowane do Twojego biznesu.
                     </p>
-                    <a href="mailto:kontakt@quanturity.pl" class="cta-button">
+                    <a href="mailto:quanturity@proton.me" class="cta-button">
                         Wyślij wiadomość
                         <svg
                             class="arrow-icon"
@@ -99,24 +111,9 @@
 
 <style>
     .contact {
-        background: var(--color-bg);
+        background: transparent;
         position: relative;
         padding-bottom: 0;
-    }
-
-    .contact::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: linear-gradient(
-            90deg,
-            transparent,
-            var(--color-border),
-            transparent
-        );
     }
 
     .contact-content {
@@ -161,6 +158,13 @@
         display: flex;
         align-items: flex-start;
         gap: var(--spacing-lg);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s ease;
+    }
+
+    .info-item.visible {
+        animation: fadeInUp 0.6s ease forwards;
     }
 
     .info-icon {
@@ -197,6 +201,12 @@
         border-radius: var(--radius-xl);
         padding: var(--spacing-3xl);
         transition: all var(--transition-base);
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .cta-card.visible {
+        animation: fadeInUp 0.6s ease forwards;
     }
 
     .cta-card:hover {
@@ -249,7 +259,6 @@
     .footer {
         margin-top: var(--spacing-4xl);
         padding: var(--spacing-2xl) 0;
-        border-top: 1px solid var(--color-border);
     }
 
     .footer-content {

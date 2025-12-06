@@ -1,8 +1,6 @@
 <script>
     import { onMount } from "svelte";
 
-    let visible = false;
-
     const services = [
         {
             title: "Systemy Webowe",
@@ -46,18 +44,35 @@
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        visible = true;
+                    const ratio = entry.intersectionRatio;
+                    const y = entry.boundingClientRect.y;
+                    const isVisible =
+                        entry.target.classList.contains("visible");
+
+                    if (isVisible) {
+                        // Leaving bottom (scrolling up) -> Early exit requested
+                        if (y > 0 && ratio < 0.9) {
+                            entry.target.classList.remove("visible");
+                        }
+                        // Leaving top (scrolling down) -> Standard exit
+                        else if (y < 0 && ratio < 0.1) {
+                            entry.target.classList.remove("visible");
+                        }
+                    } else {
+                        // Entering -> Standard entry
+                        if (ratio > 0.1) {
+                            entry.target.classList.add("visible");
+                        }
                     }
                 });
             },
-            { threshold: 0.1 },
+            { threshold: [0.1, 0.9] },
         );
 
-        const section = document.querySelector(".services");
-        if (section) {
-            observer.observe(section);
-        }
+        const elements = document.querySelectorAll(
+            ".section-header, .grids-wrapper",
+        );
+        elements.forEach((el) => observer.observe(el));
 
         return () => observer.disconnect();
     });
@@ -65,22 +80,35 @@
 
 <section class="services section" id="services">
     <div class="container">
-        <div class="section-header" class:visible>
+        <div class="section-header">
             <h2 class="section-title">Nasze Usługi</h2>
             <p class="section-subtitle">
                 Kompleksowe rozwiązania IT wspierające rozwój Twojej firmy
             </p>
         </div>
+    </div>
 
-        <div class="services-grid" class:visible>
-            {#each services as service, index}
-                <div
-                    class="service-card"
-                    style="animation-delay: {index * 0.1}s"
-                >
-                    <div class="service-icon">{service.icon}</div>
-                    <h3 class="service-title">{service.title}</h3>
-                    <p class="service-description">{service.description}</p>
+    <div class="grids-wrapper">
+        <div class="services-grid">
+            {#each services.slice(0, 3) as service, index}
+                <div class="service-wrapper slide-left">
+                    <div class="service-card">
+                        <div class="service-icon">{service.icon}</div>
+                        <h3 class="service-title">{service.title}</h3>
+                        <p class="service-description">{service.description}</p>
+                    </div>
+                </div>
+            {/each}
+        </div>
+
+        <div class="services-grid" style="margin-top: var(--spacing-xl);">
+            {#each services.slice(3) as service, index}
+                <div class="service-wrapper slide-right">
+                    <div class="service-card">
+                        <div class="service-icon">{service.icon}</div>
+                        <h3 class="service-title">{service.title}</h3>
+                        <p class="service-description">{service.description}</p>
+                    </div>
                 </div>
             {/each}
         </div>
@@ -89,23 +117,8 @@
 
 <style>
     .services {
-        background: var(--color-bg-secondary);
+        background: transparent;
         position: relative;
-    }
-
-    .services::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: linear-gradient(
-            90deg,
-            transparent,
-            var(--color-border),
-            transparent
-        );
     }
 
     .section-header {
@@ -116,9 +129,14 @@
         transition: all 0.6s ease;
     }
 
-    .section-header.visible {
+    :global(.section-header.visible) {
         opacity: 1;
         transform: translateY(0);
+    }
+
+    :global(.services-grid.visible) .service-wrapper {
+        opacity: 1;
+        transform: translateX(0);
     }
 
     .section-title {
@@ -139,27 +157,53 @@
     }
 
     .services-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
         gap: var(--spacing-xl);
+        padding: 0 var(--spacing-xl);
+    }
+
+    .service-wrapper {
+        width: 100%;
+        max-width: 400px;
+        aspect-ratio: 1;
+        opacity: 0;
+        transition:
+            transform 2.5s cubic-bezier(0.4, 0, 0.2, 1),
+            opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .service-wrapper.slide-left {
+        transform: translateX(-200%);
+    }
+
+    .service-wrapper.slide-right {
+        transform: translateX(200%);
+    }
+
+    :global(.grids-wrapper.visible) .service-wrapper {
+        opacity: 1;
+        transform: translateX(0);
     }
 
     .service-card {
+        width: 100%;
+        height: 100%;
         background: var(--color-surface);
         border: 1px solid var(--color-border);
         border-radius: var(--radius-xl);
         padding: var(--spacing-2xl);
-        transition: all var(--transition-base);
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    .services-grid.visible .service-card {
-        animation: fadeInUp 0.6s ease forwards;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
     }
 
     .service-card:hover {
-        transform: translateY(-8px);
+        transform: translateX(0) translateY(-8px);
         border-color: var(--color-accent);
         background: var(--color-surface-hover);
         box-shadow: 0 20px 60px rgba(59, 130, 246, 0.15);
