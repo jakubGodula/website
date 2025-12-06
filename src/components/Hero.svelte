@@ -10,11 +10,15 @@
     });
 </script>
 
+<script>
+    import logo from "../imgs/logo_long.png";
+</script>
+
 <section class="hero">
     <div class="container">
         <div class="hero-content" class:visible>
             <h1 class="hero-title">
-                <img src="/imgs/logo_long.png" alt="Quanturity" />
+                <img src={logo} alt="Quanturity" />
             </h1>
 
             <p class="hero-subtitle">
