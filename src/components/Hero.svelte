@@ -1,5 +1,6 @@
 <script>
     import { onMount } from "svelte";
+    import logo from "/imgs/logo_long.png";
 
     let visible = false;
 
@@ -8,10 +9,6 @@
             visible = true;
         }, 100);
     });
-</script>
-
-<script>
-    import logo from "../imgs/logo_long.png";
 </script>
 
 <section class="hero">
