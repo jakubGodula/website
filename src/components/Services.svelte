@@ -74,6 +74,9 @@
         );
         elements.forEach((el) => observer.observe(el));
 
+        const wrappers = document.querySelectorAll(".service-wrapper");
+        wrappers.forEach((el) => observer.observe(el));
+
         return () => observer.disconnect();
     });
 </script>
@@ -134,9 +137,12 @@
         transform: translateY(0);
     }
 
-    :global(.services-grid.visible) .service-wrapper {
-        opacity: 1;
-        transform: translateX(0);
+    /* Desktop: Show all when wrapper is visible */
+    @media (min-width: 769px) {
+        :global(.grids-wrapper.visible) .service-wrapper {
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+        }
     }
 
     .section-title {
@@ -170,21 +176,22 @@
         aspect-ratio: 1;
         opacity: 0;
         transition:
-            transform 2.5s cubic-bezier(0.4, 0, 0.2, 1),
-            opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform 1s cubic-bezier(0.4, 0, 0.2, 1),
+            opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .service-wrapper.slide-left {
-        transform: translateX(-200%);
+        transform: translateX(-50px);
     }
 
     .service-wrapper.slide-right {
-        transform: translateX(200%);
+        transform: translateX(50px);
     }
 
-    :global(.grids-wrapper.visible) .service-wrapper {
+    /* Individual visibility (Mobile + lazy load override) */
+    :global(.service-wrapper.visible) {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateX(0) !important;
     }
 
     .service-card {
