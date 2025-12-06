@@ -1,6 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    import logo from "/imgs/logo_long.png";
+    import logo from "/public/imgs/logo_long.png";
 
     let visible = false;
 
