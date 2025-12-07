@@ -58,7 +58,12 @@
                         <div class="info-icon">🏢</div>
                         <div class="info-content">
                             <div class="info-label">Firma</div>
-                            <div class="info-value">Quanturity sp. z o.o.</div>
+                            <div class="info-value">
+                                Quanturity sp. z o.o. <br />
+                                ul. Kazimierza Wielkiego 1/3 <br />
+                                20-611 Lublin <br />
+                                NIP: 7123501789
+                            </div>
                         </div>
                     </div>
                 </div>
