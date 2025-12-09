@@ -44,8 +44,8 @@
                         <div class="info-content">
                             <div class="info-label">Email</div>
                             <a
-                                href="mailto:kontakt@quanturity.pl"
-                                class="info-value">quanturity@proton.me</a
+                                href="mailto:biuro@quanturity.pl"
+                                class="info-value">biuro@quanturity.pl</a
                             >
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                         Opowiedz nam o swoich potrzebach, a my zaproponujemy
                         najlepsze rozwiązanie dopasowane do Twojego biznesu.
                     </p>
-                    <a href="mailto:quanturity@proton.me" class="cta-button">
+                    <a href="mailto:biuro@quanturity.pl" class="cta-button">
                         Wyślij wiadomość
                         <svg
                             class="arrow-icon"
